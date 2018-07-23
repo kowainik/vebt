@@ -22,7 +22,7 @@ matrix:
         packages:
         - ghc-8.2.2
         - cabal-install-head
-  
+
   - ghc: 8.4.3
     env: GHCVER='8.4.3' CABALVER='head'
     os: linux
@@ -33,15 +33,7 @@ matrix:
         packages:
         - ghc-8.4.3
         - cabal-install-head
-  
-  - ghc: 8.2.2
-    env: GHCVER='8.2.2' STACK_YAML="$TRAVIS_BUILD_DIR/stack-$GHCVER.yaml"
-    os: linux
-    addons:
-      apt:
-        packages:
-        - libgmp-dev
-    
+
   - ghc: 8.4.3
     env: GHCVER='8.4.3' STACK_YAML="$TRAVIS_BUILD_DIR/stack.yaml"
     os: linux
@@ -49,7 +41,7 @@ matrix:
       apt:
         packages:
         - libgmp-dev
-  
+
 
 install:
   - |
@@ -78,4 +70,3 @@ script:
 
 notifications:
   email: false
-
