@@ -25,7 +25,7 @@ data VEBT v
     | Leaf Word64 !v
 
     -- | Minimum in whole tree and children. On each depth size of machine word
-    -- is diveded by 2 but this is not yet expressed in types.
+    -- is divided by 2 but this is not yet expressed in types.
     | Branch Word64 !v (IntMap (VEBT v))
     deriving (Eq, Show)
 
@@ -35,13 +35,19 @@ empty = Empty
 {- | Lookup for element.
 -}
 lookup :: Word64 -> VEBT v -> Maybe v
-lookup k = go 6  -- 6 as in 2^6 = 64
+lookup = go 64
   where
-    -- takes k -- current size of machine word
-    go :: Int -> VEBT v -> Maybe v
-    go = error "Not implemented!"
+    -- takes w -- current size of machine word
+    go :: Int -> Word64 -> VEBT v -> Maybe v
+    go _ _ Empty            = Nothing
+    go _ k (Leaf tMin tVal) = if tMin == k then Just tVal else Nothing
+    go w k (Branch tMin tVal children) = case k `compare` tMin of
+        EQ -> Just tVal
+        LT -> Nothing
+        GT -> let (hi, lo) = split w k
+              in IM.lookup (fromIntegral hi) children >>= go (w `div` 2) lo
 
-{- | Lookup for element.
+{- | Insert for element.
 -}
 insert :: forall v . Word64 -> v -> VEBT v -> VEBT v
 insert = go 64
