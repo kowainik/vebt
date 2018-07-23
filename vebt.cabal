@@ -1,0 +1,73 @@
+name:                vebt
+version:             0.0.0
+description:         Van Emde Boas Tree
+synopsis:            Van Emde Boas Tree
+homepage:            https://github.com/kowainik/vebt
+bug-reports:         https://github.com/kowainik/vebt/issues
+license:             MPL-2.0
+license-file:        LICENSE
+author:              Kowainik
+maintainer:          xrom.xkov@gmail.com
+copyright:           2018 Kowainik
+category:            Data, Data Structure, Algorithms
+build-type:          Simple
+extra-doc-files:     README.md
+                   , CHANGELOG.md
+cabal-version:       1.24
+tested-with:         GHC == 8.2.2, GHC == 8.4.3
+
+source-repository head
+  type:                git
+  location:            https://github.com/kowainik/vebt.git
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     Vebt
+                       Prelude
+  ghc-options:         -Wall
+  build-depends:       base-noprelude
+                     , relude
+  default-language:    Haskell2010
+  default-extensions:  DeriveGeneric
+                       GeneralizedNewtypeDeriving
+                       LambdaCase
+                       OverloadedStrings
+                       RecordWildCards
+                       ScopedTypeVariables
+                       TypeApplications
+
+test-suite vebt-test
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Spec.hs
+  build-depends:       base-noprelude
+                     , vebt
+                     , relude
+  ghc-options:         -Wall -Werror -threaded -rtsopts -with-rtsopts=-N
+  default-language:    Haskell2010
+  default-extensions:  DeriveGeneric
+                       GeneralizedNewtypeDeriving
+                       LambdaCase
+                       OverloadedStrings
+                       RecordWildCards
+                       ScopedTypeVariables
+                       TypeApplications
+
+benchmark vebt-benchmark
+  type:                exitcode-stdio-1.0
+  default-language:    Haskell2010
+  ghc-options:         -Wall -Werror -O2 -threaded -rtsopts -with-rtsopts=-N
+  hs-source-dirs:      benchmark
+  main-is:             Main.hs
+  build-depends:       base-noprelude
+                     , gauge
+                     , relude
+                     , vebt
+  default-extensions:  DeriveGeneric
+                       GeneralizedNewtypeDeriving
+                       LambdaCase
+                       OverloadedStrings
+                       RecordWildCards
+                       ScopedTypeVariables
+                       TypeApplications
+
