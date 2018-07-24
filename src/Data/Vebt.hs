@@ -10,6 +10,7 @@ import Prelude hiding (lookup)
 import Data.Bits (shiftL, shiftR, (.&.))
 import Data.IntMap (IntMap)
 import Data.Word (Word64)
+import GHC.Generics (Generic)
 
 import qualified Data.IntMap as IM
 
@@ -27,7 +28,7 @@ data VEBT v
     -- | Minimum in whole tree and children. On each depth size of machine word
     -- is divided by 2 but this is not yet expressed in types.
     | Branch Word64 !v (IntMap (VEBT v))
-    deriving (Eq, Show)
+    deriving (Eq, Show, Generic)
 
 empty :: VEBT v
 empty = Empty
